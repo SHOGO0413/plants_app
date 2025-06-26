@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:plants_app/presentation/utils/navigation_providers.dart';
 
-class TitleScreen extends StatelessWidget {
+class TitleScreen extends ConsumerWidget {
   const TitleScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bottomNavIndex = ref.watch(bottomNavIndexProvider);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('タイトル'), backgroundColor: Colors.blue),
+      appBar: AppBar(
+        title: const Text(
+          '植物一覧画面',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold, // ここを追加
+          ),
+        ),
+
+        centerTitle: true,
+        backgroundColor: Colors.green,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -45,6 +60,22 @@ class TitleScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomNavIndex,
+        onTap: (index){
+          ref.read(bottomNavIndexProvider.notifier).state = index;
+
+          if (index == 0){
+            context.go('/');
+          } else if (index == 1){
+            context.go('/test');
+          }
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.yard), label: '植物一覧'),
+          BottomNavigationBarItem(icon: Icon(Icons.edit_calendar), label: '水やりカレンダー'),
+        ],
       ),
     );
   }
