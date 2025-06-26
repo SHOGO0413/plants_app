@@ -43,7 +43,7 @@ class PlantsListScreen extends ConsumerWidget {
           if (index == 0) {
             context.go('/');
           } else if (index == 1) {
-            context.go('/test');
+            context.go('/calendar');
           }
         },
         items: const <BottomNavigationBarItem>[

@@ -47,7 +47,7 @@ class TitleScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                context.push('/test');
+                context.push('/calendar');
               },
               child: Text("画面遷移サンプル"),
             ),
@@ -69,7 +69,7 @@ class TitleScreen extends ConsumerWidget {
           if (index == 0){
             context.go('/');
           } else if (index == 1){
-            context.go('/test');
+            context.go('/calendar');
           }
         },
         items: const <BottomNavigationBarItem>[
